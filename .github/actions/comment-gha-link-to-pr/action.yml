@@ -4,11 +4,6 @@ description: 'PRをmainにマージしたときにmain branchのon pushで走り
 runs:
   using: composite
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 2
-
     - name: Get PR number
       shell: bash
       run: echo "PR_NUMBER=$(git log --format=%B -n 1 | grep 'Merge pull request' | awk '{print $4}' | cut -d'#' -f2)" >> $GITHUB_ENV
