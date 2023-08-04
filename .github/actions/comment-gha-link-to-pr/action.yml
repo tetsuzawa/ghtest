@@ -1,5 +1,5 @@
 name: 'Comment GitHub Actions link to PR'
-description: 'PRをmainにマージしたときにmain branchのon pushで走り出したデプロイワークフローのリンクをもとのPRに貼る'
+description: 'PRをマージしたときにマージ先のbranchで走り出したワークフローのリンクをPRにコメントする'
 
 runs:
   using: composite
@@ -15,7 +15,7 @@ runs:
         script: |
           const pr_number = process.env.PR_NUMBER;
           const action_url = `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-          const comment_body = `Action [${process.env.GITHUB_WORKFLOW} #${process.env.GITHUB_RUN_NUMBER}](${action_url}) has started on main branch after merging this PR.`;
+          const comment_body = `マージにより${GITHUB_REF_NAME} branchでWorkflow [${process.env.GITHUB_WORKFLOW} #${process.env.GITHUB_RUN_NUMBER}](${action_url})が実行されました.`;
           github.rest.issues.createComment({
             issue_number: pr_number,
             owner: context.repo.owner,
