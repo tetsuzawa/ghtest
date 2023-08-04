@@ -15,7 +15,7 @@ runs:
         script: |
           const pr_number = process.env.PR_NUMBER;
           const action_url = `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-          const comment_body = `マージにより${GITHUB_REF_NAME} branchでWorkflow [${process.env.GITHUB_WORKFLOW} #${process.env.GITHUB_RUN_NUMBER}](${action_url})が実行されました.`;
+          const comment_body = `マージにより${process.env.GITHUB_REF_NAME} branchでWorkflow [${process.env.GITHUB_WORKFLOW} #${process.env.GITHUB_RUN_NUMBER}](${action_url})が実行されました.`;
           github.rest.issues.createComment({
             issue_number: pr_number,
             owner: context.repo.owner,
